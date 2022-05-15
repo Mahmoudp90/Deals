@@ -1,4 +1,4 @@
 from django.db import models
 
-# Create your models here.
-models.Mode=a
+
+from django.db import __all__
