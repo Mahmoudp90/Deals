@@ -1,4 +1,4 @@
 from django.db import models
 
 # Create your models here.
-models.Mode=api
+models.Mode=a
