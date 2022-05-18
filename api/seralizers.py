@@ -1,7 +1,7 @@
 from dataclasses import fields
 from pyexpat import model
 from rest_framework import serializers
-from api.models import Bidder, Bidderslist, Tenderer, Tenders, mydeals_tenderer
+from api.models import Bidder, Bidderslist, Tenderer, Tenders, mydeals_bidder, mydeals_tenderer
 from models import models
 
 
@@ -41,7 +41,7 @@ class mydeals_tendererserializers(serializers.ModelSerializer):
 
 class mydeals_bidderserializer(serializers.ModelSerializer):
     class Meta:
-        model = 
+        model = mydeals_bidder
         fields = '__all__'        
 
 
