@@ -11,6 +11,9 @@ class Bidder(models.Model):
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
+    pdf_terms_of_reference = models.FileField(upload_to='terms of reference/pdfs/')
+    pdf_primary_insurance = models.FileField(upload_to='terms of primary insurance/pdfs/')
+
 
     def __str__(self):
         return self.username
@@ -22,6 +25,8 @@ class Tenderer(models.Model):
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
+    pdf_terms_of_reference = models.FileField(upload_to='terms of reference/pdfs/')
+    pdf_primary_insurance = models.FileField(upload_to='terms of primary insurance/pdfs/')
 
     def __str__(self):
         return self.name
