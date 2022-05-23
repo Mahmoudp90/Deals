@@ -13,4 +13,4 @@ class upload_bidder(forms.ModelForm):
     class Meta:
         model =Bidder
         fields= 'pdf_terms_of_reference,pdf_primary_insurance'        
-        a
+        
