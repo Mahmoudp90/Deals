@@ -54,7 +54,7 @@ class Tenderer(models.Model):
 
 class Tenders(models.Model):
     tenderer = models.ForeignKey(Tenderer, on_delete=models.CASCADE)
-    bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
+    # bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     pdf_tender = models.FileField(upload_to='pdf_tender/')
@@ -133,3 +133,12 @@ class Mydeals_List(models.Model):
 # class Mydeals_Bidder(models.Model):
 #     bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
 #     #Tenders= models.ManyToManyRel(Tenders)    
+
+
+# Token model for user authentication 
+# class Token(models.Model):
+#     user = models.OneToOneField(Bidder or Tenderer, on_delete=models.CASCADE)
+#     token = models.CharField(max_length=255)
+
+#     def __str__(self):
+#         return self.token
