@@ -4,7 +4,6 @@ from pkgutil import ImpImporter
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -13,13 +12,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework import generics
-from rest_framework import mixins
-from rest_framework import permissions
-from .models import Bidder, Tenderer, Mydeals_List, Bid, Tenders
-from .serializers import BidSerializer, Tenders_Serializers, BidderSerializer, Mydeals_ListSerializer, TendererSerializer
-
+from rest_framework import status, generics, mixins, permissions
+from .models import Bidder, Tenderer, Mydeals_List_tenderer,Mydeals_List_bidder, Bid, Tenders
+from .serializers import BidSerializer, Tenders_Serializers, BidderSerializer, Mydeals_List_bidderSerializer,Mydeals_List_tendererSerializer, TendererSerializer
 
 
 # Create your views here
@@ -29,8 +24,8 @@ class Tenders_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.Li
     serializer_class = Tenders_Serializers
     queryset = Tenders.objects.all()
     lookup_field = 'id'
-    # permission_classes = [permissions.IsAuthenticated]
-    # authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
     def get(self, request, id=None):
         if id:
@@ -93,10 +88,10 @@ class Tenderer_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.L
     def delete(self, request, id):
         return self.destroy(request, id)
 
-# Generic Apiview with mixin class for mydeals_list
-class Mydeals_List_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
-    serializer_class = Mydeals_ListSerializer
-    queryset = Mydeals_List.objects.all()
+# Generic Apiview with mixin class for mydeals_list_tenderer
+class Mydeals_List_tenderer_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
+    serializer_class = Mydeals_List_tendererSerializer
+    queryset = Mydeals_List_tenderer.objects.all()
     lookup_field = 'id'
     # permission_classes = [permissions.IsAuthenticated]
     # authentication_classes = [TokenAuthentication]
@@ -115,6 +110,32 @@ class Mydeals_List_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixi
 
     def delete(self, request, id):
         return self.destroy(request, id)
+
+
+# Generic Apiview with mixin class for mydeals_list_bidder
+class Mydeals_List_bidder_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
+    serializer_class = Mydeals_List_bidderSerializer
+    queryset = Mydeals_List_bidder.objects.all()
+    lookup_field = 'id'
+    # permission_classes = [permissions.IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+
+    def get(self, request, id=None):
+        if id:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, id=None):
+        return self.update(request, id)
+
+    def delete(self, request, id):
+        return self.destroy(request, id)
+
+
 
 # Generic Apiview with mixin class for bid
 class Bid_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
