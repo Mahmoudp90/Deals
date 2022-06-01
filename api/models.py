@@ -5,10 +5,9 @@ import datetime
 
 
 class Bidder(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    # user model foreign key
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     phone = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
     # pdf_money = models.FileField(upload_to='pdf_money/')
     # pdf_tech = models.FileField(upload_to='pdf_tech/')
     created_at = models.DateTimeField(default=timezone.now)
@@ -18,10 +17,9 @@ class Bidder(models.Model):
         return self.name
 
 class Tenderer(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    # user model foreign key
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     phone = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
     # pdf_terms_of_reference = models.FileField(upload_to='pdf_terms_of_reference/')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
@@ -31,7 +29,6 @@ class Tenderer(models.Model):
 
 class Tenders(models.Model):
     tenderer = models.ForeignKey(Tenderer, on_delete=models.CASCADE)
-    # bidder = models.ForeignKey(Bidder, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     pdf_tender = models.FileField(upload_to='pdf_tender/', null=True)

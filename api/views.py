@@ -19,6 +19,7 @@ from .serializers import BidSerializer, Tenders_Serializers, BidderSerializer, M
 
 # Create your views here
 
+
 # Generic Apiview with mixin class for tenders
 class Tenders_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
     serializer_class = Tenders_Serializers
