@@ -6,6 +6,18 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.validators import UniqueValidator
 from .models import Bidder, Tenderer, Mydeals_List_bidder, Mydeals_List_tenderer, Bid, Tenders
 
+
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
+
 class Tenders_Serializers(ModelSerializer):
     class Meta:
         model = Tenders
