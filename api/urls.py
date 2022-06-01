@@ -25,6 +25,4 @@ urlpatterns = [
     path('mydeals_list_bidder/', Mydeals_List_bidder_Detail.as_view()),
     path('mydeals_list_tenderer/<int:id>/', Mydeals_List_tenderer_Detail.as_view()),
     path('mydeals_list_tenderer/', Mydeals_List_tenderer_Detail.as_view()),
-    
-
 ]

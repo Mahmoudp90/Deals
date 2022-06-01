@@ -1,7 +1,9 @@
 from dataclasses import fields
 from pyexpat import model
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
+from rest_framework.validators import UniqueValidator
 from .models import Bidder, Tenderer, Mydeals_List_bidder, Mydeals_List_tenderer, Bid, Tenders
 
 class Tenders_Serializers(ModelSerializer):
