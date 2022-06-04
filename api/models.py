@@ -7,6 +7,7 @@ import datetime
 class Bidder(models.Model):
     # user model foreign key
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
     phone = models.CharField(max_length=100)
     # pdf_money = models.FileField(upload_to='pdf_money/')
     # pdf_tech = models.FileField(upload_to='pdf_tech/')
@@ -19,8 +20,8 @@ class Bidder(models.Model):
 class Tenderer(models.Model):
     # user model foreign key
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
     phone = models.CharField(max_length=100)
-    # pdf_terms_of_reference = models.FileField(upload_to='pdf_terms_of_reference/')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

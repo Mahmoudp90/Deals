@@ -14,19 +14,30 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.views import APIView
 from rest_framework import status, generics, mixins, permissions
 from .models import Bidder, Tenderer, Mydeals_List_tenderer,Mydeals_List_bidder, Bid, Tenders
-from .serializers import BidSerializer, Tenders_Serializers, BidderSerializer, Mydeals_List_bidderSerializer,Mydeals_List_tendererSerializer, TendererSerializer
+from .serializers import BidSerializer, Tenders_Serializers, BidderSerializer, UserSerializer
+from .serializers import Mydeals_List_bidderSerializer,Mydeals_List_tendererSerializer, TendererSerializer
 
 
 # Create your views here
 
+
+# generic apiview for registration
+@api_view(['POST'])
+def register(request):
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.create(validated_data=serializer.validated_data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Generic Apiview with mixin class for tenders
 class Tenders_Detail(generics.GenericAPIView, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.RetrieveModelMixin):
     serializer_class = Tenders_Serializers
     queryset = Tenders.objects.all()
     lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
+    # permission_classes = [permissions.IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
 
     def get(self, request, id=None):
         if id:

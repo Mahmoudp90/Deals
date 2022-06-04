@@ -1,4 +1,5 @@
 from dataclasses import fields
+import email
 from pyexpat import model
 from django.contrib.auth.models import User
 from rest_framework import serializers
@@ -10,20 +11,20 @@ from .models import Bidder, Tenderer, Mydeals_List_bidder, Mydeals_List_tenderer
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password']
-        validators = [
-            UniqueTogetherValidator(
-                queryset=User.objects.all(),
-                fields=['username', 'email'],
-                message="User with this username/email already exists"
-            )
-        ]
+        fields = ('id', 'username', 'password', 'email')
         extra_kwargs = {'password': {'write_only': True}}
+
+    validators = [
+        UniqueValidator(
+            queryset=User.objects.all(),
+            message="User with this email already exists"
+        )
+    ]
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-    
+
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
         user = super().update(instance, validated_data)
