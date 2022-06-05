@@ -6,7 +6,7 @@ import datetime
 
 class Bidder(models.Model):
     # user model foreign key
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True )
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=100)
     # pdf_money = models.FileField(upload_to='pdf_money/')
@@ -19,7 +19,7 @@ class Bidder(models.Model):
 
 class Tenderer(models.Model):
     # user model foreign key
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=100)
     created_at = models.DateTimeField(default=timezone.now)
@@ -33,11 +33,13 @@ class Tenders(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
     pdf_tender = models.FileField(upload_to='pdf_tender/', null=True)
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now, null=True)
+    updated_at = models.DateTimeField(default=timezone.now, null=True)
     phone = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    endate = models.DateTimeField(default=timezone.now)
+    # endate = models.DateTimeField(default=timezone.now)
+    insurance_money = models.CharField(max_length=100, default=0)
+    terms_of_ref_price = models.CharField(max_length=100, default=0)
 
     def __str__(self):
         return self.title
