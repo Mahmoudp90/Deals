@@ -9,8 +9,6 @@ class Bidder(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True )
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=100)
-    # pdf_money = models.FileField(upload_to='pdf_money/')
-    # pdf_tech = models.FileField(upload_to='pdf_tech/')
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 

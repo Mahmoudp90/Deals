@@ -11,26 +11,41 @@ from .models import Bidder, Tenderer, Mydeals_List_bidder, Mydeals_List_tenderer
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'email')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    validators = [
-        UniqueValidator(
-            queryset=User.objects.all(),
-            message="User with this email already exists"
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password',
         )
-    ]
-
+        validators = [
+            UniqueTogetherValidator(
+                queryset=User.objects.all(),
+                fields=['username', 'email'],
+                message= 'Username and email must be unique together.'
+            )
+        ]
+    
+    # create user
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
 
+    # update password
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
         user = super().update(instance, validated_data)
         if password:
             user.set_password(password)
             user.save()
+        return user
+
+    # change user email
+    def update_email(self, instance, validated_data):
+        user = super().update(instance, validated_data)
+        user.email = validated_data.pop('email')
+        user.save()
         return user
 
 class Tenders_Serializers(ModelSerializer):
