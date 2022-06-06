@@ -1,0 +1,11 @@
+Name: Mahmoud El-Sayed Sherif
+ID: 1952310420
+
+Image link: https://hub.docker.com/r/mahmoudp90/cloud-assignment
+
+1- $ docker pull mahmoudp90/cloud-assignment:cloud
+2- $ docker run --publish 8080:80 --detach --name my-website  mahmoudp90/cloud-assignment:cloud
+3- > browse to 127.0.0.1:8080/website.html
+
+Answer:
+	Mapping an directory to the image is better. Building an image with a static website will disable us to edit the static website and the webserver's configurations without creating a new image, making it time consuming process.

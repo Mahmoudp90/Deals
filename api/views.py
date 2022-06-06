@@ -25,7 +25,7 @@ from django.contrib.auth.models import User
 
 # User Registeration
 class register(APIView):
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
     def get(self, format=None):
         users = User.objects.all()
