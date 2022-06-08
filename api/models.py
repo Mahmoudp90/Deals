@@ -81,3 +81,12 @@ class Mydeals_List_bidder(models.Model):
     #     return self.Date
 
 ## many to many relationship between bidder and tenders
+class subscription:
+    def __init__(self, tenderer, tender):
+        self.tender = tender
+        self.tenderer = tenderer
+        self.bidder = Bidder.objects.get(user=tenderer)
+        self.tenderer = Tenderer.objects.get(user=tender)
+        self.bid = Bid.objects.get(tender=tender, tenderer=tenderer)
+        self.tender = Tenders.objects.get(tenderer=tenderer, tender=tender)
+        
