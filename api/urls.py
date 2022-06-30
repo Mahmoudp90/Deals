@@ -2,6 +2,7 @@ from django.urls import path
 # from .views import tenders_list, tenderers_list, bids_list, mydeals_list, CustomAuthToken
 from .views import Tenders_Detail, Bidder_Detail, Tenderer_Detail, Mydeals_List_bidder_Detail
 from .views import Mydeals_List_tenderer_Detail, Bid_Detail, register
+from .views import ChangePasswordView
 
 
 app_name = 'api'
@@ -20,4 +21,5 @@ urlpatterns = [
     path('mydeals_list_tenderer/<int:id>/', Mydeals_List_tenderer_Detail.as_view()),
     path('mydeals_list_tenderer/', Mydeals_List_tenderer_Detail.as_view()),
     path('register/', register.as_view()),
+    path('api/change-password/', ChangePasswordView.as_view(), name='change-password'),
 ]
