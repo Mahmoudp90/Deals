@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 class Bidder(models.Model):
     # user model 1:1
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # name = models.CharField(max_length=200)
-    # phone = models.CharField(max_length=100)
+    name = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
@@ -19,8 +19,8 @@ class Bidder(models.Model):
 class Tenderer(models.Model):
     # user model 1:1
     # user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    # name = models.CharField(max_length=200)
-    # phone = models.CharField(max_length=100)
+    name = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
 
